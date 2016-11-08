@@ -5,6 +5,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.util.Objects;
 
 /**
  * Created by MStev on 11/7/2016.
@@ -21,11 +23,10 @@ public class Driver {
     private JButton showChirpTotalButton;
     private JButton showPositivityButton;
     private JTree userTree;
-    private String selected;
-    private boolean selectedIsGroup;
 
     private void updateUserTree()
     {
+        System.out.println("in updateUserTree");
         DefaultTreeModel model = (DefaultTreeModel)userTree.getModel();
         model.setRoot(populate(Group.getRoot()));
         //this.userTree = new JTree(populate(Group.getRoot()));
@@ -74,104 +75,73 @@ public class Driver {
                 JOptionPane.showMessageDialog(new JFrame(), Integer.toString(Ledger.getInstance().positiveLedgerKeywords()) + " of " + Integer.toString(Ledger.getInstance().getChirpArrayList().size()) + " chirps contain positive messages.");
             }
         });
-        userTree.addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
-            public void valueChanged(TreeSelectionEvent treeSelectionEvent) {
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode) userTree.getLastSelectedPathComponent();
-
-                if(node == null) {selected = "ROOT"; selectedIsGroup = true;}
-
-                if(node.isLeaf())
-                {
-                    selected = node.toString();
-                    selectedIsGroup = false;
-                } else {
-                    selected = node.toString();
-                    selectedIsGroup = true;
-                }
-            }
-        });
         addUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(selectedIsGroup)
+                System.out.println(Group.getGroupMaster().size());
+                for(Group group : Group.getGroupMaster())
                 {
-                    for(Group group : Group.getGroupMaster())
+                    System.out.println(Objects.equals(group.getName(), userTree.getLastSelectedPathComponent().toString()));
+                    if (Objects.equals(group.getName(), userTree.getLastSelectedPathComponent().toString()))
                     {
-                        if(group.getName().equals(selected))
-                        {
-                            group.addUser(new User(addUserTextField.getText()));
-                        }
+                        System.out.println("Selected: " + userTree.getLastSelectedPathComponent());
+                        group.addUser(new User(addUserTextField.getText()));
+                        break;
                     }
-                } else {
-                    for(Group group : Group.getGroupMaster())
-                    {
-                        for(User user : group.getUsers())
-                        {
-                            if(user.getId().equals(selected))
-                            {
-                                group.addUser(new User(addUserTextField.getText()));
-                            }
-                        }
-                    }
+                    System.out.println("user master size: "+Group.getUserMaster().size());
                 }
+                System.out.println("Hello");
+                updateUserTree();
             }
         });
         addGroupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(selectedIsGroup)
+                for(Group group : Group.getGroupMaster())
                 {
-                    for(Group group : Group.getGroupMaster())
+                    if (Objects.equals(group.getName(), userTree.getLastSelectedPathComponent().toString()))
                     {
-                        if(group.getName().equals(selected))
-                        {
-                            group.addGroup(new Group(addGroupTextField.getText()));
-                        }
-                    }
-                } else {
-                    for(Group group : Group.getGroupMaster())
-                    {
-                        for(User user : group.getUsers())
-                        {
-                            if(user.getId().equals(selected))
-                            {
-                                group.addGroup(new Group(addGroupTextField.getText()));
-                            }
-                        }
+                        group.addGroup(new Group(addGroupTextField.getText()));
+                        break;
                     }
                 }
+                updateUserTree();
+            }
+        });
+        userTree.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent treeSelectionEvent) {
+                System.out.println(userTree.getLastSelectedPathComponent());
             }
         });
         showUserViewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(selectedIsGroup)
+                for (User user : Group.getUserMaster())
                 {
-                    return;
-                } else {
-                    for(User user : Group.getUserMaster())
+                    if(user.getId().equals(userTree.getLastSelectedPathComponent().toString()))
                     {
-                        if(user.getId().equals(selected))
-                        {
-                            JFrame userFrame = new JFrame();
-                            userFrame.setContentPane(new UserView(user).getUserViewPanel());
-                            userFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                            userFrame.setSize(400,400);
-                            userFrame.setVisible(true);
-                        }
+                        JFrame userFrame = new JFrame();
+                        userFrame.setContentPane(new UserView(user).getUserViewPanel());
+                        userFrame.setSize(400,400);
+                        userFrame.setVisible(true);
                     }
                 }
             }
+        });
+        userTree.addComponentListener(new ComponentAdapter() {
+        });
+        userTree.addComponentListener(new ComponentAdapter() {
         });
     }
 
     public static void main(String[] args)
     {
+        System.out.println(Group.getGroupMaster().get(0).getName());
         JFrame jFrame = new JFrame();
         jFrame.setContentPane(new Driver().panelMain);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setSize(400,400);
+        jFrame.setSize(600,400);
         jFrame.setVisible(true);
     }
 }

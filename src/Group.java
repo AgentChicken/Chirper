@@ -38,6 +38,7 @@ class Group {
     {
         this.users.add(user);
         userMaster.add(user);
+        System.out.println("in addUser method");
     }
     void addGroup(Group group)
     {

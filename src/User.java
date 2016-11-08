@@ -19,7 +19,7 @@ class User implements Observer
     {
         return followers;
     }
-    public ArrayList<Chirp> getTimeline()
+    ArrayList<Chirp> getTimeline()
     {
         return timeline;
     }
@@ -31,6 +31,7 @@ class User implements Observer
     User(String id)
     {
         this.id = id;
+        Ledger.getInstance().attach(this);
     }
 
     private void addChirp(Chirp chirp)

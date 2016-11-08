@@ -16,11 +16,12 @@ public class UserView {
     private JButton refreshButton;
     private JPanel userViewPanel;
 
-    public JPanel getUserViewPanel() {
+    JPanel getUserViewPanel() {
         return userViewPanel;
     }
 
-    public UserView(final User user) {
+    UserView(final User user) {
+        user.follow(user.getId());
         followingList.setListData(user.getFollowing().toArray());
         userTextArea.setText(user.getId());
         followButton.addActionListener(new ActionListener() {
