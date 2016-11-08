@@ -27,7 +27,6 @@ class Ledger extends Subject {
         chirpArrayList.add(chirp);
         newChirp = chirp;
         notifyObservers();
-        System.out.println("In addChirp method");
     }
 
     int positiveLedgerKeywords()

@@ -79,24 +79,28 @@ public class Driver {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println(Group.getGroupMaster().size());
+                if(userTree.getLastSelectedPathComponent() == null)
+                {
+                    JOptionPane.showMessageDialog(new JFrame(), "Please select a parent group.");
+                }
                 for(Group group : Group.getGroupMaster())
                 {
-                    System.out.println(Objects.equals(group.getName(), userTree.getLastSelectedPathComponent().toString()));
                     if (Objects.equals(group.getName(), userTree.getLastSelectedPathComponent().toString()))
                     {
-                        System.out.println("Selected: " + userTree.getLastSelectedPathComponent());
                         group.addUser(new User(addUserTextField.getText()));
                         break;
                     }
-                    System.out.println("user master size: "+Group.getUserMaster().size());
                 }
-                System.out.println("Hello");
                 updateUserTree();
             }
         });
         addGroupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if(userTree.getLastSelectedPathComponent() == null)
+                {
+                    JOptionPane.showMessageDialog(new JFrame(), "Please select a parent group.");
+                }
                 for(Group group : Group.getGroupMaster())
                 {
                     if (Objects.equals(group.getName(), userTree.getLastSelectedPathComponent().toString()))
@@ -117,6 +121,10 @@ public class Driver {
         showUserViewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if(userTree.getLastSelectedPathComponent() == null)
+                {
+                    JOptionPane.showMessageDialog(new JFrame(), "Please select a user.");
+                }
                 for (User user : Group.getUserMaster())
                 {
                     if(user.getId().equals(userTree.getLastSelectedPathComponent().toString()))
