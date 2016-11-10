@@ -81,16 +81,35 @@ public class Driver {
         addUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println(Group.getGroupMaster().size());
-                if(userTree.getLastSelectedPathComponent() == null)
+                if(addUserTextField.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(new JFrame(), "Please enter a name for the user.");
+                }
+                else if(userTree.getLastSelectedPathComponent() == null)
                 {
                     JOptionPane.showMessageDialog(new JFrame(), "Please select a parent group.");
+                    return;
+                }
+                for(User user : Group.getUserMaster())
+                {
+                    if(user.getId().equals(addUserTextField.getText()))
+                    {
+                        JOptionPane.showMessageDialog(new JFrame(), "User already exists.");
+                        return;
+                    }
                 }
                 for(Group group : Group.getGroupMaster())
                 {
-                    if (Objects.equals(group.getName(), userTree.getLastSelectedPathComponent().toString()))
+                    if(group.getName().equals(addUserTextField.getText())){
+                        JOptionPane.showMessageDialog(new JFrame(), "A group and a user can't share a name.");
+                        return;
+                    }
+                }
+                for(Group treeGroup : Group.getGroupMaster())
+                {
+                    if (Objects.equals(treeGroup.getName(), userTree.getLastSelectedPathComponent().toString()))
                     {
-                        group.addUser(new User(addUserTextField.getText()));
+                        treeGroup.addUser(new User(addUserTextField.getText()));
                         break;
                     }
                 }
@@ -102,15 +121,36 @@ public class Driver {
         addGroupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(userTree.getLastSelectedPathComponent() == null)
+                if(addGroupTextField.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(new JFrame(), "Please enter a name for the group.");
+                    return;
+                }
+                else if(userTree.getLastSelectedPathComponent() == null)
                 {
                     JOptionPane.showMessageDialog(new JFrame(), "Please select a parent group.");
+                    return;
                 }
                 for(Group group : Group.getGroupMaster())
                 {
-                    if (Objects.equals(group.getName(), userTree.getLastSelectedPathComponent().toString()))
+                    if(group.getName().equals(addGroupTextField.getText())){
+                        JOptionPane.showMessageDialog(new JFrame(), "Group already exists.");
+                        return;
+                    }
+                }
+                for(User user : Group.getUserMaster())
+                {
+                    if(user.getId().equals(addGroupTextField.getText()))
                     {
-                        group.addGroup(new Group(addGroupTextField.getText()));
+                        JOptionPane.showMessageDialog(new JFrame(), "A group and a user can't share a name.");
+                        return;
+                    }
+                }
+                for(Group treeGroup : Group.getGroupMaster())
+                {
+                    if (Objects.equals(treeGroup.getName(), userTree.getLastSelectedPathComponent().toString()))
+                    {
+                        treeGroup.addGroup(new Group(addGroupTextField.getText()));
                         break;
                     }
                 }
@@ -145,10 +185,10 @@ public class Driver {
                 }
             }
         });
-        userTree.addComponentListener(new ComponentAdapter() {
+        /*userTree.addComponentListener(new ComponentAdapter() {
         });
         userTree.addComponentListener(new ComponentAdapter() {
-        });
+        });*/
     }
 
     //this class was to be made as a Singleton, but it's easier and just as safe to put the main method inside
