@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="UserView">
-  <grid id="27dc6" binding="userViewPanel" layout-manager="GridLayoutManager" row-count="9" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="userViewPanel" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
@@ -10,7 +10,7 @@
     <children>
       <component id="cf3c2" class="javax.swing.JTextField" binding="followTextField">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -20,24 +20,15 @@
       </component>
       <component id="da859" class="javax.swing.JButton" binding="followButton" default-binding="true">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Follow"/>
         </properties>
       </component>
-      <component id="263fd" class="javax.swing.JTextArea" binding="timelineArea">
-        <constraints>
-          <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <editable value="false"/>
-          <text value=""/>
-        </properties>
-      </component>
       <component id="31589" class="javax.swing.JList" binding="followingList">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <model/>
@@ -45,24 +36,15 @@
       </component>
       <component id="a1c06" class="javax.swing.JLabel">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Following"/>
-        </properties>
-      </component>
-      <component id="ce108" class="javax.swing.JLabel" binding="userLabel">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font style="1"/>
-          <text value="Label"/>
+          <text value="Following:"/>
         </properties>
       </component>
       <component id="470b8" class="javax.swing.JButton" binding="refreshButton" default-binding="true">
         <constraints>
-          <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="View new chirps"/>
@@ -70,7 +52,7 @@
       </component>
       <component id="c2ba8" class="javax.swing.JTextField" binding="newChirpTextField">
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -78,24 +60,34 @@
       </component>
       <component id="3350d" class="javax.swing.JButton" binding="chirpButton" default-binding="true">
         <constraints>
-          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Chirp"/>
         </properties>
       </component>
-      <component id="23696" class="javax.swing.JSeparator">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-      </component>
       <component id="59dbc" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
+      <scrollpane id="f4c20">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="263fd" class="javax.swing.JTextArea" binding="timelineArea">
+            <constraints/>
+            <properties>
+              <editable value="false"/>
+              <text value=""/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

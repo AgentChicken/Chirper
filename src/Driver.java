@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+import static java.lang.Math.round;
+
 /**
  * Created by MStev on 11/7/2016.
  */
@@ -70,7 +72,13 @@ public class Driver {
         showPositivityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showMessageDialog(new JFrame(), Integer.toString(Ledger.getInstance().positiveLedgerKeywords()) + " of " + Integer.toString(Ledger.getInstance().getChirpArrayList().size()) + " chirps contain positive messages.");
+                JOptionPane.showMessageDialog(new JFrame(),
+                        Integer.toString(Ledger.getInstance().positiveLedgerKeywords())
+                                + " of "
+                                + Integer.toString(Ledger.getInstance().getChirpArrayList().size())
+                                + " chirps, "
+                                + round(100 * (double) Ledger.getInstance().positiveLedgerKeywords() / (double) Ledger.getInstance().getChirpArrayList().size())
+                                + "%, contain positive messages.");
             }
         });
         //add a user
@@ -86,6 +94,14 @@ public class Driver {
                 {
                     JOptionPane.showMessageDialog(new JFrame(), "Please select a parent group.");
                     return;
+                }
+                for(User user : Group.getUserMaster())
+                {
+                    if(user.getId().equals(userTree.getLastSelectedPathComponent().toString()))
+                    {
+                        JOptionPane.showMessageDialog(new JFrame(), "Please select a parent group (you've selected a user).");
+                        return;
+                    }
                 }
                 for(User user : Group.getUserMaster())
                 {
@@ -127,6 +143,14 @@ public class Driver {
                 {
                     JOptionPane.showMessageDialog(new JFrame(), "Please select a parent group.");
                     return;
+                }
+                for(User user : Group.getUserMaster())
+                {
+                    if(user.getId().equals(userTree.getLastSelectedPathComponent().toString()))
+                    {
+                        JOptionPane.showMessageDialog(new JFrame(), "Please select a parent group (you've selected a user).");
+                        return;
+                    }
                 }
                 for(Group group : Group.getGroupMaster())
                 {
@@ -172,7 +196,7 @@ public class Driver {
                 {
                     if(user.getId().equals(userTree.getLastSelectedPathComponent().toString()))
                     {
-                        JFrame userFrame = new JFrame();
+                        JFrame userFrame = new JFrame(user.getId());
                         userFrame.setContentPane(new UserView(user).getUserViewPanel());
                         userFrame.setSize(400,400);
                         userFrame.setVisible(true);
@@ -180,10 +204,6 @@ public class Driver {
                 }
             }
         });
-        /*userTree.addComponentListener(new ComponentAdapter() {
-        });
-        userTree.addComponentListener(new ComponentAdapter() {
-        });*/
     }
 
     //this class was to be made as a Singleton, but it's easier and just as safe to put the main method inside
@@ -191,7 +211,7 @@ public class Driver {
     //the main method creates the initial window
     public static void main(String[] args)
     {
-        JFrame jFrame = new JFrame();
+        JFrame jFrame = new JFrame("Chirper");
         jFrame.setContentPane(new Driver().panelMain);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(600,400);

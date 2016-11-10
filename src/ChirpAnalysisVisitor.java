@@ -20,8 +20,11 @@ class ChirpAnalysisVisitor implements Visitor {
         positiveWords.add("wonderful");
         positiveWords.add("amazing");
         positiveWords.add("nice");
+        positiveWords.add("excellent");
+        positiveWords.add("lovely");
+        positiveWords.add("inspiring");
         for (String keyword : positiveWords) {
-            if (chirp.getText().contains(keyword)) positiveWordCount++;
+            if (chirp.getText().toLowerCase().contains(keyword)) positiveWordCount++;
         }
     }
 }

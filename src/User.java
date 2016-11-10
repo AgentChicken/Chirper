@@ -41,7 +41,7 @@ class User implements Observer
     }
 
     //follow someone
-    void follow(String id)
+    boolean follow(String id)
     {
         for(int i = 0; i < Group.getUserMaster().size(); i++)
         {
@@ -49,8 +49,10 @@ class User implements Observer
             {
                 following.add(Group.getUserMaster().get(i).getId());
                 Group.getUserMaster().get(i).addFollower(this.id);
+                return true;
             }
         }
+        return false;
     }
 
     //add a new user to a list of followers
