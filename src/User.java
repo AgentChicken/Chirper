@@ -34,11 +34,13 @@ class User implements Observer
         Ledger.getInstance().attach(this);
     }
 
+    //add a new chirp to the timeline
     private void addChirp(Chirp chirp)
     {
         this.timeline.add(chirp);
     }
 
+    //follow someone
     void follow(String id)
     {
         for(int i = 0; i < Group.getUserMaster().size(); i++)
@@ -51,11 +53,13 @@ class User implements Observer
         }
     }
 
-    void addFollower(String id)
+    //add a new user to a list of followers
+    private void addFollower(String id)
     {
         followers.add(id);
     }
 
+    //if the new chirp was made by someone this was following, that chirp is added to this.timeline
     public void update(Subject subject) {
         if(following.contains(Ledger.getInstance().getNewChirp().getId()))
         {
@@ -63,12 +67,14 @@ class User implements Observer
         }
     }
 
+    //submit a chirp
     void chirp(String text)
     {
         Chirp chirp = new Chirp (this.id, text);
         Ledger.getInstance().addChirp(chirp);
     }
 
+    //unused method; here for future improvement
     int positiveTimelineKeywords()
     {
         ChirpAnalysisVisitor chirpAnalysisVisitor = new ChirpAnalysisVisitor();

@@ -22,8 +22,11 @@ public class UserView {
 
     UserView(final User user) {
         user.follow(user.getId());
+        //get a list of users and display them in a list
         followingList.setListData(user.getFollowing().toArray());
-        userTextArea.setText(user.getId());
+        userTextArea.setText(user.getId()); //display the id of the user
+        //follow the user whose ID was entered into the neighboring text area
+        //update the user list
         followButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -31,6 +34,7 @@ public class UserView {
                 followingList.setListData(user.getFollowing().toArray());
             }
         });
+        //make a chirp and update the list of chirps, just like Twitter
         chirpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -49,6 +53,7 @@ public class UserView {
                 }
             }
         });
+        //get new chirps, just like Twitter
         refreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

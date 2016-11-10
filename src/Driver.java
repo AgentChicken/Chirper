@@ -50,7 +50,8 @@ public class Driver {
     }
 
     private Driver() {
-        updateUserTree();
+        updateUserTree(); //replace example values with real ones straight away
+        //these next four show data on how many users, groups, chirps, and positive chirps there are
         showUserTotalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -75,6 +76,8 @@ public class Driver {
                 JOptionPane.showMessageDialog(new JFrame(), Integer.toString(Ledger.getInstance().positiveLedgerKeywords()) + " of " + Integer.toString(Ledger.getInstance().getChirpArrayList().size()) + " chirps contain positive messages.");
             }
         });
+        //add a user
+        //a parent group must be selected
         addUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -94,6 +97,8 @@ public class Driver {
                 updateUserTree();
             }
         });
+        //add a group
+        //a parent group must be selected
         addGroupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -112,12 +117,15 @@ public class Driver {
                 updateUserTree();
             }
         });
+        //listen to which node is selected
         userTree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent treeSelectionEvent) {
+                //for logging
                 System.out.println(userTree.getLastSelectedPathComponent());
             }
         });
+        //open the view of the selected user
         showUserViewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -143,6 +151,9 @@ public class Driver {
         });
     }
 
+    //this class was to be made as a Singleton, but it's easier and just as safe to put the main method inside
+    //of the UI class (the Ledger class of chirps is a Singleton, however)
+    //the main method creates the initial window
     public static void main(String[] args)
     {
         System.out.println(Group.getGroupMaster().get(0).getName());

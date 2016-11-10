@@ -6,10 +6,13 @@ import java.util.ArrayList;
  */
 
 class Group {
+    //initial root group
     private static Group root = new Group("ROOT");
 
-    String name;
+    private String name;
+    //master list of all users
     private static ArrayList<User> userMaster = new ArrayList<>();
+    //master list of all groups; initially contains the root group
     private static ArrayList<Group> groupMaster = new ArrayList<Group>() {{add(root);}};
     private ArrayList<User> users = new ArrayList<>();
     private ArrayList<Group> groups = new ArrayList<>();
@@ -34,11 +37,14 @@ class Group {
         return groups;
     }
 
+    //add a new user to the group
     void addUser(User user)
     {
         this.users.add(user);
         userMaster.add(user);
     }
+
+    //add a new group to the group
     void addGroup(Group group)
     {
         this.groups.add(group);

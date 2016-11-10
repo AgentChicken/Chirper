@@ -22,6 +22,7 @@ class Chirp implements Visitable{
         this.text = text;
     }
 
+    //lets a visitor analyse contents
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);

@@ -10,6 +10,7 @@ class Ledger extends Subject {
         return INSTANCE;
     }
 
+    //arraylist of all chirps
     private ArrayList<Chirp> chirpArrayList = new ArrayList<>();
 
     ArrayList<Chirp> getChirpArrayList() {
@@ -22,6 +23,9 @@ class Ledger extends Subject {
         return newChirp;
     }
 
+    //adds a new chirp and notifies everyone that a new chirp has been made
+    //the new chirp is stored in newChirp. If a user is following the person that
+    //submitted the chirp, that chirp is added to the users timeline
     void addChirp(Chirp chirp)
     {
         chirpArrayList.add(chirp);
@@ -29,6 +33,7 @@ class Ledger extends Subject {
         notifyObservers();
     }
 
+    //lets visitor analyse contents
     int positiveLedgerKeywords()
     {
         ChirpAnalysisVisitor chirpAnalysisVisitor = new ChirpAnalysisVisitor();
