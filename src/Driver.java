@@ -5,7 +5,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
 import java.util.Objects;
 
 /**
@@ -26,10 +25,8 @@ public class Driver {
 
     private void updateUserTree()
     {
-        System.out.println("in updateUserTree");
         DefaultTreeModel model = (DefaultTreeModel)userTree.getModel();
         model.setRoot(populate(Group.getRoot()));
-        //this.userTree = new JTree(populate(Group.getRoot()));
     }
 
     private DefaultMutableTreeNode populate(Group group)
@@ -161,8 +158,6 @@ public class Driver {
         userTree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent treeSelectionEvent) {
-                //for logging
-                System.out.println(userTree.getLastSelectedPathComponent());
             }
         });
         //open the view of the selected user
@@ -196,7 +191,6 @@ public class Driver {
     //the main method creates the initial window
     public static void main(String[] args)
     {
-        System.out.println(Group.getGroupMaster().get(0).getName());
         JFrame jFrame = new JFrame();
         jFrame.setContentPane(new Driver().panelMain);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

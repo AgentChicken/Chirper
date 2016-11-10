@@ -11,11 +11,11 @@ public class UserView {
     private JButton followButton;
     private JTextArea timelineArea;
     private JList followingList;
-    private JTextArea newChirpArea;
     private JButton chirpButton;
     private JButton refreshButton;
     private JPanel userViewPanel;
     private JLabel userLabel;
+    private JTextField newChirpTextField;
     private ArrayList<String> modifiedFollowingList;
 
     JPanel getUserViewPanel() {
@@ -28,13 +28,17 @@ public class UserView {
         modifiedFollowingList = new ArrayList<>(user.getFollowing());
         modifiedFollowingList.remove(user.getId());
         followingList.setListData(modifiedFollowingList.toArray());
-        System.out.println(user.getFollowing());
-        userLabel.setText(user.getId()); //display the id of the user
+        userLabel.setText("@" + user.getId()); //display the id of the user
         //follow the user whose ID was entered into the neighboring text area
         //update the user list
         followButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if(followTextField.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(new JFrame(), "Enter the name of a user.");
+                    return;
+                }
                 user.follow(followTextField.getText());
                 modifiedFollowingList = new ArrayList<>(user.getFollowing());
                 modifiedFollowingList.remove(user.getId());
@@ -45,9 +49,9 @@ public class UserView {
         chirpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(newChirpArea.getText() != null)
+                if(!newChirpTextField.getText().equals(""))
                 {
-                    user.chirp(newChirpArea.getText());
+                    user.chirp(newChirpTextField.getText());
 
                     String result = "";
 
@@ -57,6 +61,11 @@ public class UserView {
                     }
 
                     timelineArea.setText(result);
+
+                    newChirpTextField.setText("");
+                } else
+                {
+                    JOptionPane.showMessageDialog(new JFrame(), "Enter text to post a chirp.");
                 }
             }
         });
